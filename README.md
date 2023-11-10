@@ -1,5 +1,3 @@
-# cv_clevino_dev
-
 My Flutter CV project.
 [click here](https://clevy-af.github.io/web)
 
