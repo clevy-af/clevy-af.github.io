@@ -1,5 +1,5 @@
 My Flutter CV project.
-[click here](https://clevy-af.github.io/web)
+[click here](https://clevy-af.github.io/build/web)
 
 ## Disclaimer
 
