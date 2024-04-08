@@ -10,7 +10,7 @@ class Footer extends StatelessWidget {
   const Footer({required this.width,required this.scrollController, Key? key}) : super(key: key);
   List<Widget> get footerText{
     return [
-      Text('© 2023',
+      Text('© 2024',
           style: GoogleFonts.getFont('Delius',
               color: MyColors.gray,
               fontSize: 14)),
@@ -52,5 +52,5 @@ class Footer extends StatelessWidget {
     );
   }
 
-  bool get isLarge => width > Breakpoints.sm;
+  bool get isLarge => width > Breakpoints.md;
 }

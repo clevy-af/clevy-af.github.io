@@ -5,11 +5,10 @@ import 'package:cv_clevino_dev/widgets/skill_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final List<String> interests = [
-  'Coding','Memes','Board games','Music',
-  'Web series','Crafting','Learning','Helping',
+  'Memes','Coding','Board games','Helping',
+  'Crafting','Web series','Learning','Music',
 ];
 
 class LowerContainer extends StatelessWidget {
@@ -43,24 +42,10 @@ class LowerContainer extends StatelessWidget {
                     SkillColumn(width: width),
                     SizedBox(width: 0.05 * width),
                     // hello with bio and info
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        EducationColumn(width: width),
-                        // HelloWithBio(
-                        //   ratio:0.4 ,
-                        //   width: width,
-                        // ),
-                        // const SizedBox(
-                        //   height: 30,
-                        // ),
-                        // Info(width: width,ratio:0.4)
-                      ],
-                    )
+                    EducationColumn(width: width)
                   ],
                 );
               }
-              else {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -71,35 +56,38 @@ class LowerContainer extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 30),
-                          child:EducationColumn(width: width),
+                          child:EducationColumn(width: 2*width),
                           // child: HelloWithBio(width: 3 * width,ratio: 0.3,),
                         ),
                       ],
                     )
                   ],
                 );
-              }
             }),
             SizedBox(
               height: width * 0.07,
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(left:width>=Breakpoints.lg? width * 0.1:width * 0.05),
-              child: Text('My interests',
-                  style: GoogleFonts.getFont('Delius',
-                      color: Colors.white, fontSize: 19)),
+            LayoutBuilder(
+                builder: (context, constraints) {
+                return Container(
+                  alignment:constraints.maxWidth >= Breakpoints.lg?Alignment.center:Alignment.centerLeft,
+                  margin: EdgeInsets.only(left:width>=Breakpoints.lg? 0:width * 0.1),
+                  child: Text('My interests',
+                      style: titleStyle),
+                );
+              }
             ),
             SizedBox(height: width * 0.03),
             // 820
             LayoutBuilder(builder: (context, constraints) {
-              final double tileWidth=width * 0.76;
+              final double tileWidth=width ;
+                double height = 100;
               if (constraints.maxWidth >= Breakpoints.lg) {
-                return InterestGrid(width: tileWidth, height: 100,interestsKey: interestsKey,tileCount: 2,);
+                return InterestGrid(width: tileWidth, height: height,interestsKey: interestsKey,tileCount: 2,);
               } else if (constraints.maxWidth < Breakpoints.lg && constraints.maxWidth >= Breakpoints.sm) {
-                return InterestGrid(width: tileWidth, height: 180,interestsKey: interestsKey,tileCount: 4,);
+                return InterestGrid(width: tileWidth, height: height*1.8,interestsKey: interestsKey,tileCount: 4,);
               } else {
-                return InterestGrid(width: tileWidth, height: 360,interestsKey: interestsKey,tileCount: 8,);
+                return InterestGrid(width: tileWidth, height: height*3.6,interestsKey: interestsKey,tileCount: 8,);
               }
             }),
             const SizedBox(height:10)
@@ -132,9 +120,10 @@ class InterestGrid extends StatelessWidget {
         itemCount: 8,
         itemBuilder: (BuildContext context, int index) => InterestBox(
           text: interests[index],
-          color: index%2==(index<4?0:1)?MyColors.primary:MyColors.darkBackground,
-          textColor: index%2==(index<4?0:1)?MyColors.lightText:MyColors.primary,
+          color: MyColors.darkBackground,//index%2==(index<4?0:1)?MyColors.primary:
+          borderColor: index%2==(index<4?0:1)?MyColors.lightText:MyColors.primary,
           key: index == 4 ? interestsKey : null,
+          suffix: index%2==(index<4?0:1)?'!':'()' ,
         ),
         staggeredTileBuilder: (int index) => StaggeredTile.fit(tileCount),
         mainAxisSpacing: 10.0,
@@ -158,6 +147,8 @@ class SkillColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text('Skills',style: titleStyle,),
+        SizedBox(height: 0.01 * width),
         SkillCard(
           title: 'UI/UX Development',
           timeline: "Freelancing",
@@ -199,6 +190,8 @@ class EducationColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text('Education',style: titleStyle,),
+        SizedBox(height: 0.01 * width),
         SkillCard(
           title: 'Bachelors Degree',
           timeline: "2017-2020",

@@ -1,35 +1,33 @@
-import 'package:cv_clevino_dev/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InterestBox extends StatelessWidget {
   final Color color;
-  final Color textColor;
+  final Color borderColor;
   final String text;
+  final String suffix;
   const InterestBox(
       {required this.text,
       required this.color,
-      required this.textColor,
-      Key? key})
+      required this.borderColor,
+      Key? key, required this.suffix})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 170,
+      // width: 170,
       padding: const EdgeInsets.symmetric(vertical: 7),
       decoration: BoxDecoration(
           color: color,
-          border: Border.all(
-              color: (textColor == Colors.black)
-                  ? MyColors.primary
-                  : textColor),
+          gradient: LinearGradient(colors: [color.withAlpha(30),borderColor.withAlpha(30)],),
+          border: Border.all(color: borderColor),
         borderRadius: BorderRadius.circular(5),
       ),
       child: Center(
-          child: Text('.' + text,
+          child: Text( text+suffix,
               style: GoogleFonts.getFont('Delius',
-                  color: textColor, fontSize: 13))),
+                  color: Colors.white, fontSize: 13))),
     );
   }
 }

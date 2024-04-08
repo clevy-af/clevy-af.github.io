@@ -16,12 +16,11 @@ class NavBarItemWithIcon extends StatelessWidget {
     return ElevatedButton.icon(
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(0),
-        backgroundColor: MaterialStateProperty.all<Color>(
-            MyColors.brightBackground),
+        backgroundColor: MaterialStateProperty.all<Color>(MyColors.brightBackground),
       ),
-      icon: Icon(icon),
+      icon: Icon(icon,color: MyColors.primary,),
       onPressed:onTap,
-      label: Text(text.capitalizeFirst!, style: const TextStyle(fontSize: 12)),
+      label: Text(text.capitalizeFirst!, style: const TextStyle(fontSize: 12,color: Colors.white)),
     );
   }
 }
